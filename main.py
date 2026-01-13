@@ -454,7 +454,7 @@ def is_valid_order(text):
 
 # 🧭 Maqsad guruhlar
 DEST_CHAT_IDS = [
-    -1003582945294,
+    -1003250099196,
 ]
 
 dest_entities = []  # faqat entity lar saqlanadi
