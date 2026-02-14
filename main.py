@@ -456,7 +456,6 @@ def is_valid_order(text):
 # 🧭 Maqsad guruhlar
 DEST_CHAT_IDS = [
     -1003308279795,
-    -1003250099196,
     -1003835270504
 ]
 
