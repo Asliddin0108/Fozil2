@@ -1,3 +1,4 @@
+
 # file: bot1_openA.py
 from telethon import TelegramClient, events, Button
 from telethon.tl.types import User
@@ -18,242 +19,161 @@ if os.environ.get("RAILWAY_INSTANCE") and os.path.exists(lock_path):
 else:
     open(lock_path, "w").close()
 
-# 🟢 Guruhlar ro'yxati (faqat shu IDlardagi xabarlar tinglanadi)
 SOURCE_CHAT_IDS = [
-    -1001919108125,
-    -1002217711254,
-    -1002216953123,
-    -1002656537956,
-    -1002750732064,
-    -1002618184342,
-    -1002619678433,
-    -1002543605107,
-    -1002328880787,
-    -1002644651561,
-    -1001586063735,
-    -1002202414557,
-    -1002287201244,
-    -1002268921510,
-    -1002463548215,
-    -1001751611282,
-    -1002352877569,
-    -1002344415468,
-    -1001805495036,
     -1001151786413,
-    -1001593326810,
-    -1002826041687,
-    -1001598133468,
-    -1002445037757,
-    -1002142234124,
-    -1001831780698,
-    -1002032249195,
-    -1002164015195,
-    -1002364464921,
-    -1002222090244,
-    -1001979537831,
-    -1002285680811,
-    -1001916489240,
-    -1002118214777,
-    -1001611162325,
-    -1001938069696,
-    -1001780614815,
-    -1001616839980,
-    -1001419020468,
-    -1001937606569,
-    -1001664391604,
-    -1001995047886,
-    -1001862853132,
-    -1002255167708,
-    -1001675691028,
-    -1002438357334,
-    -1001753599449,
-    -1002046930439,
-    -1002618722089,
-    -1001772298511,
-    -1002223112284,
-    -1002558452957,
-    -1002407590575,
-    -1001548912251,
-    -1002653422760,
-    -1001910539086,
-    -1001449255554,
-    -1001335283645,
-    -1001826631123,
-    -1001662551358,
-    -1002097073574,
-    -1001785340604,
-    -1002028123169,
-    -1002408725338,
-    -1002485628725,
-    -1002070629526,
-    -1001514705110,
-    -1002202144997,
-    -1001891380523,
+    -1001167779790,
+    -1001174129219,
     -1001211288673,
-    -1002458821335,
-    -1001769199037,
-    -1002025374028,
-    -1001616995835,
-    -1001630448768,
-    -1002000321420,
-    -1001822987973,
-    -1001478722034,
-    -1001832434183,
-    -1001947135679,
-    -1002164884613,
-    -1002440632307,
-    -1002177587381,
-    -1002121893194,
-    -1001433669620,
-    -1001811141920,
-    -1001798390420,
-    -1002622375613,
-    -1002109689918,
-    -1002063015819,
-    -1001956670988,
-    -1002579860903,
-    -1002400797687,
-    -1001463428540,
-    -1002897097086,
-    -1001840529817,
-    -1001562628810,
+    -1001292674273,
     -1001389959266,
-    -1001804696642,
-    -1001613654341,
-    -1001952134228,
-    -1002409711932,
+    -1001408708197,
+    -1001436571502,
+    -1001449255554,
+    -1001463428540,
+    -1001478722034,
     -1001488002341,
-    -1001906080002,
-    -1001975272644,
+    -1001543754946,
+    -1001550445906,
+    -1001551779296,
+    -1001579265984,
+    -1001592648081,
+    -1001613654341,
+    -1001616839980,
+    -1001644580852,
+    -1001651498858,
+    -1001663936622,
+    -1001708221879,
+    -1001761114406,
+    -1001769199037,
+    -1001771372940,
+    -1001773882132,
+    -1001798390420,
+    -1001811533352,
+    -1001820289368,
+    -1001832434183,
+    -1001835606840,
+    -1001838376696,
+    -1001840529817,
+    -1001840672748,
+    -1001891255511,
+    -1001899581243,
     -1001914338900,
-    -1002496522362,
-    -1001754192550,
-    -1002016152908,
-    -1002734938847,
-    -1002339461231,
-    -1002430039046,
-    -1001579371989,
-    -1002450441158,
+    -1001919108125,
+    -1001930379977,
+    -1001947135679,
+    -1001973570920,
+    -1001975272644,
+    -1001979537831,
+    -1001993404465,
+    -1002000321420,
+    -1002001903393,
+    -1002019555745,
+    -1002040780497,
+    -1002046930439,
+    -1002057187341,
+    -1002063015819,
+    -1002068926123,
+    -1002091926657,
+    -1002098313030,
+    -1002104290485,
+    -1002122461325,
+    -1002124686083,
+    -1002138837184,
+    -1002141280624,
+    -1002177587381,
+    -1002210264469,
+    -1002245881447,
     -1002247127057,
+    -1002401185679,
+    -1002409711932,
+    -1002430039046,
+    -1002440632307,
+    -1002456210489,
+    -1002580858183,
+    -1002618722089,
+    -1002734938847,
+    -1002766681304,
+    -1003103099324,
 ]
 
-# 🔗 Guruh ID -> Link
+
 GROUP_LINKS = {
-    -1001919108125: "https://t.me/Vodiy_Toshkent_taxi_xizmatiN1",
-    -1002217711254: "https://t.me/uchqurgontoshkenttaksi",
-    -1002216953123: "https://t.me/POP_CHUSTTOSHKENT",
-    -1002656537956: "https://t.me/ZARO_TOSHKENT_NAMANGAN_TAXI_1001",
-    -1002750732064: "https://t.me/TOSHKENT_POP_CHUST_SHAFYOR",
-    -1002618184342: "https://t.me/POPCHUSTTOSHKENT",
-    -1002619678433: "https://t.me/reklamavijdon",
-    -1002543605107: "https://t.me/Vijdontaxishafyorlari",
-    -1002328880787: "https://t.me/POP_TOSHKENT_TAKSii",
-    -1002644651561: "https://t.me/Beshariq_Toshkentt_Taxi",
-    -1001586063735: "https://t.me/baliqkol_toshkent_taxi",
-    -1002202414557: "https://t.me/Namangan_toshkent_07",
-    -1002287201244: "https://t.me/TAXI_CHAQIRISH",
-    -1002268921510: "https://t.me/Yangiqorgon_toshket_taxsi",
-    -1002463548215: "https://t.me/qoqon_taksi_toshken",
-    -1001751611282: "https://t.me/POP_CHUST_SHAHARLAR_ARO_TAKSI",
-    -1002352877569: "https://t.me/vodiymoscow",
-    -1002344415468: "https://t.me/namangan_toshkent_taxi_1158Disp",
-    -1001805495036: "https://t.me/POP_CHUST_TOSHKENT",
     -1001151786413: "https://t.me/Namangan_Toshkent_taxii_n1",
-    -1001593326810: "https://t.me/universaltoshkentpetak",
-    -1002826041687: "https://t.me/namangan_toshkent_namangan_vijdo",
-    -1001598133468: "https://t.me/toshkent_uchqorgon_uychi_405",
-    -1002445037757: "https://t.me/chust_shoraqorgon_toshkent_taksi",
-    -1002142234124: "https://t.me/Toshkent_vodiy_student_taxi",
-    -1001831780698: "https://t.me/Namangan_Yangiqorgon_Toshkentd",
-    -1002032249195: "https://t.me/TOSHKENT_POP_CHUST_TOSHKENT_TAXI",
-    -1002164015195: "https://t.me/toraqorgon_toshkent_turaqurgonn",
-    -1002364464921: "https://t.me/TagijarToshkentTaksiXizmarlari",
-    -1002222090244: "https://t.me/Pop_Toshkent1",
-    -1001979537831: "https://t.me/econom_taxi1",
-    -1002285680811: "https://t.me/NAMANGAN_TOSHKENT_13",
-    -1001916489240: "https://t.me/NAMANGA_TORAQORGON_TOSHKENT",
-    -1002118214777: "https://t.me/POP_TOSHKENT",
-    -1001611162325: "https://t.me/NAMANGAN_TOSHKENT2",
-    -1001938069696: "https://t.me/NAMANGAN_TOSHKENT_TAKSI11",
-    -1001780614815: "https://t.me/namangan_buxoro_24_7",
-    -1001616839980: "https://t.me/Namangan_Yangiqorgon_Toshkent",
-    -1001419020468: "https://t.me/taksih",
-    -1001937606569: "https://t.me/chortoq_taksi",
-    -1001664391604: "https://t.me/Nanay_Toshken",
-    -1001995047886: "https://t.me/eNamangan_Yangiqorgon_Toshkent",
-    -1001862853132: "https://t.me/taxi_uz_namangan_toshkent",
-    -1002255167708: "https://t.me/Namanganbeshariqyaypantaxi",
-    -1001675691028: "https://t.me/Toshkent_Zarkent_taksi",
-    -1002438357334: "https://t.me/toshkent_namangan699",
-    -1001753599449: "https://t.me/uychichortoqtaksi",
-    -1002046930439: "https://t.me/Koroskon_Toshkent",
-    -1002618722089: "https://t.me/uychi_chortoq_toshkent_2",
-    -1001772298511: "https://t.me/Yangiqorgon_toshkent_chortoq",
-    -1002223112284: "https://t.me/toshkentnamangantaksiy",
-    -1002558452957: "https://t.me/UYCHI_CHORTOQ_TOSHKENT_ARZONTAXI",
-    -1002407590575: "https://t.me/namangantoshkentm",
-    -1001548912251: "https://t.me/NAMANGAN_TOSHKENT_TAKSIS",
-    -1002653422760: "https://t.me/zakaz_berish_uchunn",
-    -1001910539086: "https://t.me/TAXI_NAMANGAN_TOSHKENT_TAXI",
-    -1001449255554: "https://t.me/qogaytaksi",
-    -1001335283645: "https://t.me/Namangan_Toshkentt_Taxi",
-    -1001826631123: "https://t.me/TOSHKENT_VODIY_TAKSILARI",
-    -1001662551358: "https://t.me/namangantoshkenttak",
-    -1002097073574: "https://t.me/nam_toshk",
-    -1001785340604: "https://t.me/taksi_toshkent_jamashuy_taxi",
-    -1002028123169: "https://t.me/namangantoshkentbaliqkol2121",
-    -1002408725338: "https://t.me/namangan24tashkent24",
-    -1002485628725: "https://t.me/namangan_toshkent_samarqand_1",
-    -1002070629526: "https://t.me/Yangiqurgon_Toshkent",
-    -1001514705110: "https://t.me/namangan_tosh",
-    -1002202144997: "https://t.me/biznes1_taksi",
-    -1001891380523: "https://t.me/Uychi_toshkentt",
+    -1001167779790: "https://t.me/Namangan_toshkent_kamfort",
+    -1001174129219: "https://t.me/uychuchqorgon",
     -1001211288673: "https://t.me/Chortoq_Yangiqurgon_Toshkent_tak",
-    -1002458821335: "https://t.me/uychi_chortoq_toshkent11",
-    -1001769199037: "https://t.me/Namangan_Toshkent_UYCHI12",
-    -1002025374028: "https://t.me/uychi_Chortoq_toshkent12",
-    -1001616995835: "https://t.me/toshkent_chortoq",
-    -1001630448768: "https://t.me/chortoq_toshkent",
-    -1002000321420: "https://t.me/chortoq_Toshkent29",
-    -1001822987973: "https://t.me/Yangiqorgon_Toshkent_yangi_taksi",
-    -1001478722034: "https://t.me/CHORTOQ_UYCHI_TAXI",
-    -1001832434183: "https://t.me/toshkentchortoq24",
-    -1001947135679: "https://t.me/shopirlarbekobod",
-    -1002164884613: "https://t.me/Namangan_Toshkent_taksi_1",
-    -1002440632307: "https://t.me/UychiChortoqNamanganToshkenttaxi",
-    -1002177587381: "https://t.me/Namangan_uychi_Toshkent",
-    -1002121893194: "https://t.me/Chortoq_toshkent9",
-    -1001433669620: "https://t.me/namangantoshkent24",
-    -1001811141920: "https://t.me/NAMANGAN_TAKSI_TOSHKENT",
-    -1001798390420: "https://t.me/toshkent_uychi",
-    -1002622375613: "https://t.me/Chortoqtoshkenttaxi",
-    -1002109689918: "https://t.me/towkentnamangan",
-    -1002063015819: "https://t.me/ZAKAZ_BERISH_GURUH",
-    -1001956670988: "https://t.me/Namangan_Toshkenttt",
-    -1002579860903: "https://t.me/H1Lzx2",
-    -1002400797687: "https://t.me/toshkent_namangan_uychi_taksi_1",
-    -1001463428540: "https://t.me/namangan_taksi",
-    -1002897097086: "https://t.me/ChustPop_Toshkent",
-    -1001840529817: "https://t.me/namangan_uychi_chortoq_utoshkent",
-    -1001562628810: "https://t.me/Namangan_Toshkenti",
+    -1001292674273: "https://t.me/Chortoq_Namangan_ToshkentTaksi",
     -1001389959266: "https://t.me/NAMANGAN_TOSHKENT_TAKSI6864",
-    -1001804696642: "https://t.me/Norin_toshkent_norintoshkent",
-    -1001613654341: "https://t.me/toshkent_namangan_taksi01",
-    -1001952134228: "https://t.me/namangan_toshkent_toraqorgon",
-    -1002409711932: "https://t.me/UYCHI_TOSHKENTNAMANGAN",
+    -1001408708197: "https://t.me/nanaytoshkent",
+    -1001436571502: "https://t.me/toshkent_uchqorgon_uychi",
+    -1001449255554: "https://t.me/qogaytaksi",
+    -1001463428540: "https://t.me/namangan_taksi",
+    -1001478722034: "https://t.me/CHORTOQ_UYCHI_TAXI",
     -1001488002341: "https://t.me/Uychi_Toshkent_chortoq_taxi",
-    -1001906080002: "https://t.me/uychi_toshkent_chortoq_taksi",
-    -1001975272644: "https://t.me/namangan_toshkent_universal_taxi",
+    -1001543754946: "https://t.me/Toshkent_Yangiqorgon_Iskavot",
+    -1001550445906: "https://t.me/NamanganToshkentN1taxi",
+    -1001551779296: "https://t.me/sartzui",
+    -1001579265984: "https://t.me/chortoq_toshkent_yangiqorgon_t",
+    -1001592648081: "https://t.me/Toshkent_Namangan_Chortoq_Taxi",
+    -1001613654341: "https://t.me/toshkent_namangan_taksi01",
+    -1001616839980: "https://t.me/Yangiqurgon_Namangan_Toshkent",
+    -1001644580852: "https://t.me/chortoq_toshkent_taxi",
+    -1001651498858: "https://t.me/taxi_kamfort",
+    -1001663936622: "https://t.me/chortoq_toshket",
+    -1001708221879: "https://t.me/Namangan_50_060",
+    -1001761114406: "https://t.me/UYCHI_TOSHKENT_TAKSI_05",
+    -1001769199037: "https://t.me/Namangan_Toshkent_UYCHI12",
+    -1001771372940: "https://t.me/Toshkent_yangiqorgon_chortoq",
+    -1001773882132: "https://t.me/Chortoq_Toshkent_Uychi_Taksii",
+    -1001798390420: "https://t.me/toshkent_uychi",
+    -1001811533352: "https://t.me/Toshkent_Yangiqorgon_taxi",
+    -1001820289368: "https://t.me/Kalishox_toshkent_taxi",
+    -1001832434183: "https://t.me/toshkentchortoq24",
+    -1001835606840: "https://t.me/oraariq",
+    -1001838376696: "https://t.me/vodiy_toshkent_voxa",
+    -1001840529817: "https://t.me/namangan_uychi_chortoq_utoshkent",
+    -1001840672748: "https://t.me/Namanganyangikurgontaksi93",
+    -1001891255511: "https://t.me/toshkentyangikurgontaxi",
+    -1001899581243: "https://t.me/Uychi_Toshkent_taxi_24",
     -1001914338900: "https://t.me/uychi_chortoq_namangan_toshkent1",
-    -1002496522362: "https://t.me/UYCHI_CHORTOQ_TOSHKENTA",
-    -1001754192550: "https://t.me/NAMANGANTAXITOSHKEN24SOAT",
-    -1002016152908: "https://t.me/shafyorla2025",
-    -1002734938847: "https://t.me/toshkent_namangan_taksi_tezride",
-    -1002339461231: "https://t.me/Uychichortoqtoshkkent452",
+    -1001919108125: "https://t.me/toshkent_vodiy_taksi_xizmati01",
+    -1001930379977: "https://t.me/taksinamangantochkent1992",
+    -1001947135679: "https://t.me/shopirlarbekobod",
+    -1001973570920: "https://t.me/uychi_chortoq_toshkent3",
+    -1001975272644: "https://t.me/namangan_toshkent_universal_taxi",
+    -1001979537831: "https://t.me/nam_tosh",
+    -1001993404465: "https://t.me/namangan_toshkent_taxi_yonalishi",
+    -1002000321420: "https://t.me/chortoq_Toshkent29",
+    -1002001903393: "https://t.me/Toshkent_Uchqorgon_UychiTaxi",
+    -1002019555745: "https://t.me/Namangan_Toshkent_Chortoq_taksi",
+    -1002040780497: "https://t.me/Chortoq_Toshkent_Namangantaxi",
+    -1002046930439: "https://t.me/Koroskon_Toshkent",
+    -1002057187341: "https://t.me/toshkent_namangan_taksi_lichniy",
+    -1002063015819: "https://t.me/ZAKAZ_BERISH_GURUH",
+    -1002068926123: "https://t.me/nanay_toshkent_taxi",
+    -1002091926657: "https://t.me/toshkent_namangan_birlashgan",
+    -1002098313030: "https://t.me/namangan_toshkent_taxiN1",
+    -1002104290485: "https://t.me/yangiqurgon_toshkent_uychi",
+    -1002122461325: "https://t.me/NAMANGAN_TOSHKENT_taki",
+    -1002124686083: "https://t.me/vodiytaksi_vodiytaxi_tezkor",
+    -1002138837184: "https://t.me/qorabog_toshkent_24_7",
+    -1002141280624: "https://t.me/uychi_toshkent_taksi1",
+    -1002177587381: "https://t.me/Namangan_uychi_Toshkent",
+    -1002210264469: "https://t.me/tezkortaxi598",
+    -1002245881447: "https://t.me/Namangan_toshkent_24_soat",
+    -1002247127057: "https://t.me/uychi_toshkent",
+    -1002401185679: "https://t.me/Uychi_toshkent1",
+    -1002409711932: "https://t.me/UYCHI_TOSHKENTNAMANGAN",
     -1002430039046: "https://t.me/uychi_chortoq_tosh",
-    -1001579371989: "https://t.me/TaxiiitoshkentUychi",
-    -1002450441158: "https://t.me/chortoq_toshkentga",
+    -1002440632307: "https://t.me/UychiChortoqNamanganToshkenttaxi",
+    -1002456210489: "https://t.me/uchqorgon_taxii",
+    -1002580858183: "https://t.me/TOSHKENT_BRLASHGAN_TAXI941575740",
+    -1002618722089: "https://t.me/uychi_chortoq_toshkent_2",
+    -1002734938847: "https://t.me/toshkent_namangan_taksi_tezride",
+    -1002766681304: "https://t.me/Uychi_chortoq_toshkent_247",
+    -1003103099324: "https://t.me/UchqorgonToshkent",
 }
+
 
 # ===== Normalizatsiya (emoji + translit + typo tuzatish) =====
 try:
@@ -455,10 +375,9 @@ def is_valid_order(text):
 
 # 🧭 Maqsad guruhlar
 DEST_CHAT_IDS = [
-    -1003308279795,
-    -1003835270504,
-    -1003768764756
+    -1003308279795
 ]
+
 
 dest_entities = []  # faqat entity lar saqlanadi
 
@@ -474,6 +393,18 @@ def is_duplicate(message_text: str, user_id: int) -> bool:
             return True
     recent_messages[key] = now
     return False
+
+# 🤖 Auto reply uchun
+replied_message_ids = set()
+
+AUTO_REPLY_TEXT = (
+    "✅ Assalomu alaykum!\n\n"
+    "🚕 Zakazingiz qabul qilindi.\n"
+    "📱 Haydovchilar tez orada siz bilan bog‘lanadi.\n\n"
+    "🙏 Rahmat!"
+)
+
+
 
 
 # 📨 Yangi xabarlar
@@ -554,11 +485,26 @@ async def handler(event):
             except Exception:
                 pass
             return
-
+        
 
         # 🧾 Matnli xabar filtri
         if not is_valid_order(text or ""):
             return
+
+        # 🤖 AUTO REPLY (foydalanuvchini lichkasiga)
+        if event.id not in replied_message_ids:
+            try:
+                await client.send_message(
+                    sender.id,
+                    AUTO_REPLY_TEXT
+                )
+
+                replied_message_ids.add(event.id)
+
+                print(f"🤖 Lichkaga auto reply yuborildi: user_id={sender.id}")
+
+            except Exception as e:
+                print("❌ Lichkaga auto reply xato:", e)
 
         formatted = (
             "━━━━━━━━━━━━━━\n"
@@ -573,7 +519,7 @@ async def handler(event):
             "━━━━━━━━━━━━━━"
         )
 
-        # ✅ 4 ta guruhga yuborish
+        # ✅ guruhlarga yuborish
         for ent in dest_entities:
             await client.send_message(
                 ent,
@@ -584,6 +530,7 @@ async def handler(event):
     except Exception as e:
         print("❌ Xatolik:", e)
         traceback.print_exc()
+
 
 
 # ▶️ Botni ishga tushirish
@@ -603,3 +550,4 @@ async def main():
 if __name__ == "__main__":
     import asyncio
     asyncio.run(main())
+
